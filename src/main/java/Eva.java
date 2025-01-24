@@ -39,9 +39,11 @@ public class Eva {
     }
 
     private static void addTask(ArrayList<Task> taskList, String taskDesc) {
-        Task task = new Task(taskDesc);
+        String taskType = taskDesc.split(" ")[0];
+        Task task = new Task(taskDesc, taskType);
         taskList.add(task);
-        System.out.println("added: " + task.toString());
+        System.out.println("Got it: I've added this task:\n" + task.toString());
+        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 
     private static void markTask(ArrayList<Task> taskList, String taskDesc, boolean isDone) {
