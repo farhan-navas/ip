@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Eva {
+    public static ArrayList<Task> taskList  = new ArrayList<>();
 
     public static void main(String[] args) throws TaskException {
         Scanner scanner = new Scanner(System.in);
@@ -12,50 +13,59 @@ public class Eva {
         String end = "Bye. Hope to see you again soon!";
         System.out.println(intro);
 
-        ArrayList<Task> taskList = new ArrayList<>();
         while (true) {
             String currInput = scanner.nextLine().trim();
             if (currInput.equals("bye")) {
                 System.out.println(end);
                 break;
             } else if (currInput.equals("list")) {
-                printTaskList(taskList);
+                printTaskList();
             } else if (currInput.startsWith("mark")) {
-                markTask(taskList, currInput, true);
+                markTask(currInput, true);
             } else if (currInput.startsWith("unmark")) {
-                markTask(taskList, currInput, false);
+                markTask(currInput, false);
+            } else if (currInput.startsWith("delete")) {
+                deleteTask(taskList, currInput);
             } else {
-                addTask(taskList, currInput);
+                addTask(currInput);
             }
         }
         scanner.close();
     }
 
-    private static void printTaskList(ArrayList<Task> taskList) {
-        if (taskList.isEmpty()) {
+    private static void printTaskList() {
+        if (Eva.taskList.isEmpty()) {
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i).toString());
+        for (int i = 0; i < Eva.taskList.size(); i++) {
+            System.out.println((i + 1) + ". " + Eva.taskList.get(i).toString());
         }
     }
 
-    private static void addTask(ArrayList<Task> taskList, String taskDesc) throws TaskException {
+    private static void addTask(String taskDesc) throws TaskException {
         Task task = Task.createTask(taskDesc);
-        taskList.add(task);
+        Eva.taskList.add(task);
         System.out.println("Got it: I've added this task:\n" + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
+        System.out.println(String.format("Now you have %d tasks in the list.", Eva.taskList.size()));
     }
 
-    private static void markTask(ArrayList<Task> taskList, String taskDesc, boolean isDone) {
+    private static void markTask(String taskDesc, boolean isDone) {
         int posToChange = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
         if (isDone) {
-            taskList.get(posToChange).markAsDone();
-            System.out.println("Nice! I've marked this task as done: \n" + taskList.get(posToChange).toString());
+            Eva.taskList.get(posToChange).markAsDone();
+            System.out.println("Nice! I've marked this task as done: \n" + Eva.taskList.get(posToChange).toString());
         } else {
-            taskList.get(posToChange).markAsUndone();
-            System.out.println("Ok! I've marked this task as not done yet: \n" + taskList.get(posToChange).toString());
+            Eva.taskList.get(posToChange).markAsUndone();
+            System.out.println("Ok! I've marked this task as not done yet: \n" + Eva.taskList.get(posToChange).toString());
         }
+    }
+
+    private static void deleteTask(ArrayList<Task> taskList, String taskDesc) {
+        int posToDelete = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
+        Task task = taskList.get(posToDelete);
+        taskList.remove(posToDelete);
+        System.out.println("Noted. I've removed this task: \n" + task.toString());
+        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 }
