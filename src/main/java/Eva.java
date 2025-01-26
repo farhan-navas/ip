@@ -1,9 +1,12 @@
+import exceptions.TaskException;
+import tasks.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Eva {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TaskException {
         Scanner scanner = new Scanner(System.in);
         String intro = "Hello! I'm Eva \nWhat can I do for you? \n";
         String end = "Bye. Hope to see you again soon!";
@@ -13,6 +16,7 @@ public class Eva {
         while (true) {
             String currInput = scanner.nextLine().trim();
             if (currInput.equals("bye")) {
+                System.out.println(end);
                 break;
             } else if (currInput.equals("list")) {
                 printTaskList(taskList);
@@ -24,8 +28,6 @@ public class Eva {
                 addTask(taskList, currInput);
             }
         }
-
-        System.out.println(end);
         scanner.close();
     }
 
@@ -33,14 +35,14 @@ public class Eva {
         if (taskList.isEmpty()) {
             return;
         }
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println((i + 1) + ". " + taskList.get(i).toString());
         }
     }
 
-    private static void addTask(ArrayList<Task> taskList, String taskDesc) {
-        String taskType = taskDesc.split(" ")[0];
-        Task task = new Task(taskDesc, taskType);
+    private static void addTask(ArrayList<Task> taskList, String taskDesc) throws TaskException {
+        Task task = Task.createTask(taskDesc);
         taskList.add(task);
         System.out.println("Got it: I've added this task:\n" + task.toString());
         System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
