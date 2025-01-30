@@ -39,31 +39,25 @@ public class Handler {
     public static void saveTasks(ArrayList<Task> tasks) {
         try {
             File taskFile = new File(FILE_PATH);
-            if (taskFile.delete()) {
+            if (!taskFile.exists()) {
+                taskFile.getParentFile().mkdirs();
                 taskFile.createNewFile();
-            } else {
-                throw new FileNotFoundException();
             }
 
-            FileWriter taskFileWriter = new FileWriter(FILE_PATH);
-            for (int i = 0; i < tasks.size(); i++) {
-                Task currTask = tasks.get(i);
-                if (currTask instanceof tasks.Event) {
-                    taskFileWriter.write("E | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + " | " + ((tasks.Event) currTask).getStartTime() + "-" + ((tasks.Event) currTask).getEndTime() + "\n");
-                } else if (currTask instanceof tasks.Deadline) {
-                    taskFileWriter.write("D | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + " | " + ((tasks.Deadline) currTask).getEndTime() + "\n");
-                } else if (currTask instanceof tasks.Todo) {
-                    taskFileWriter.write("T | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + "\n");
+            try (FileWriter taskFileWriter = new FileWriter(FILE_PATH, false)) {
+                for (Task currTask : tasks) {
+                    if (currTask instanceof tasks.Event) {
+                        taskFileWriter.write("E | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + " | " + ((tasks.Event) currTask).getStartTime() + "-" + ((tasks.Event) currTask).getEndTime() + "\n");
+                    } else if (currTask instanceof tasks.Deadline) {
+                        taskFileWriter.write("D | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + " | " + ((tasks.Deadline) currTask).getEndTime() + "\n");
+                    } else if (currTask instanceof tasks.Todo) {
+                        taskFileWriter.write("T | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + "\n");
+                    }
                 }
             }
-            taskFileWriter.close();
-        } catch (FileNotFoundException e) {
-           System.out.println("File not found!");
         } catch (IOException e) {
-            System.out.println("IO Exception has occurred!");
+            System.out.println("IO Error while getting messages: " + e.getMessage());
         }
-
-
     }
 
 }

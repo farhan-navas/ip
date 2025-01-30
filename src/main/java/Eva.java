@@ -32,7 +32,9 @@ public class Eva {
                 addTask(currInput);
             }
         }
+
         scanner.close();
+        Handler.saveTasks(Eva.taskList);
     }
 
     private static void printTaskList() {
