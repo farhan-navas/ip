@@ -5,14 +5,23 @@ import exceptions.TaskException;
 public class Deadline extends Task {
     private String endTime;
 
-    public Deadline(String name, String endTime) {
+    private Deadline(String name, String endTime) {
         super(name);
+        this.endTime = endTime;
+    }
+
+    public Deadline(String name, boolean isDone, String endTime) {
+        super(name, isDone);
         this.endTime = endTime;
     }
 
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.endTime);
+    }
+
+    public String getEndTime() {
+        return this.endTime;
     }
 
     public static Deadline createDeadline(String taskDesc) throws TaskException {

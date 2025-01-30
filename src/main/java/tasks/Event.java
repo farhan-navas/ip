@@ -6,10 +6,24 @@ public class Event extends Task {
     private String startTime;
     private String endTime;
 
-    public Event(String name, String startTime, String endTime) {
+    private Event(String name, String startTime, String endTime) {
        super(name);
        this.startTime = startTime;
        this.endTime = endTime;
+    }
+
+    public Event(String name, boolean isDone, String startTime, String endTime) {
+        super(name, isDone);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public String getStartTime() {
+        return this.startTime;
+    }
+
+    public String getEndTime() {
+        return this.endTime;
     }
 
     @Override
@@ -29,5 +43,6 @@ public class Event extends Task {
         String endTime = split2[1];
         return new Event(name, startTime, endTime);
     }
+
 }
 

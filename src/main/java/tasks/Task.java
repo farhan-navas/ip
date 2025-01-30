@@ -2,13 +2,20 @@ package tasks;
 
 import exceptions.TaskException;
 
+import java.util.Arrays;
+
 public abstract  class Task {
     private String name;
     private boolean isDone;
 
     public Task(String name) {
-        this.isDone = false;
         this.name = name;
+        this.isDone = false;
+    }
+
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
@@ -17,6 +24,14 @@ public abstract  class Task {
 
     public void markAsUndone() {
         this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -36,4 +51,25 @@ public abstract  class Task {
             throw new TaskException("Invalid task type!");
         }
     }
+
+    // Factory method to load task from hard drive
+    public static Task loadTask(String taskDesc) throws TaskException {
+        String[] split = taskDesc.split(" \\| ");
+        String taskType = split[0].trim();
+        boolean isDone = split[1].trim().equals("1");
+        String taskName = split[2].trim();
+        if (taskType.equals("E")) {
+            String startTime = split[3].split("-")[0].trim();
+            String endTime = split[3].split("-")[1].trim();
+            return new Event(taskName, isDone, startTime, endTime);
+        } else if (taskType.equals("D")) {
+            String endTime = split[3].trim();
+            return new Deadline(taskName, isDone, endTime);
+        } else if (taskType.equals("T")) {
+            return new Todo(taskName, isDone);
+        }
+
+        throw new TaskException("Invalid task type!");
+    }
+
 }

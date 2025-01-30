@@ -4,8 +4,12 @@ import exceptions.TaskException;
 
 public class Todo extends Task {
 
-    public Todo(String name) {
+    private Todo(String name) {
         super(name);
+    }
+
+    public Todo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     @Override

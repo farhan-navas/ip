@@ -3,11 +3,13 @@ import tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import storage.Handler;
 
 public class Eva {
     public static ArrayList<Task> taskList  = new ArrayList<>();
 
     public static void main(String[] args) throws TaskException {
+        Eva.taskList = Handler.loadTasks();
         Scanner scanner = new Scanner(System.in);
         String intro = "Hello! I'm Eva \nWhat can I do for you? \n";
         String end = "Bye. Hope to see you again soon!";
@@ -25,7 +27,7 @@ public class Eva {
             } else if (currInput.startsWith("unmark")) {
                 markTask(currInput, false);
             } else if (currInput.startsWith("delete")) {
-                deleteTask(taskList, currInput);
+                deleteTask(Eva.taskList, currInput);
             } else {
                 addTask(currInput);
             }
@@ -35,6 +37,7 @@ public class Eva {
 
     private static void printTaskList() {
         if (Eva.taskList.isEmpty()) {
+            System.out.println("You have no tasks in your list!");
             return;
         }
         System.out.println("Here are the tasks in your list:");
