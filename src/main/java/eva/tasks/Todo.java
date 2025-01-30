@@ -1,6 +1,6 @@
-package tasks;
+package eva.tasks;
 
-import exceptions.TaskException;
+import eva.exceptions.TaskException;
 
 public class Todo extends Task {
 

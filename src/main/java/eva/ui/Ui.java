@@ -1,13 +1,13 @@
-package ui;
+package eva.ui;
 
-import exceptions.TaskException;
-import tasks.Task;
+import eva.exceptions.TaskException;
+import eva.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private final String INTRO = "Hello! I'm Eva \nWhat can I do for you? \n";
+    private final String INTRO = "Hello! I'm eva.Eva \nWhat can I do for you? \n";
     private final String END = "Bye. Hope to see you again soon!";
 
     private ArrayList<Task> taskList;
@@ -44,10 +44,10 @@ public class Ui {
 
     private void printTaskList() {
         if (this.taskList.isEmpty()) {
-            System.out.println("You have no tasks in your list!");
+            System.out.println("You have no eva.tasks in your list!");
             return;
         }
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("Here are the eva.tasks in your list:");
         for (int i = 0; i < this.taskList.size(); i++) {
             System.out.println((i + 1) + ". " + this.taskList.get(i).toString());
         }
@@ -68,7 +68,7 @@ public class Ui {
         Task task = Task.createTask(taskDesc);
         this.taskList.add(task);
         System.out.println("Got it: I've added this task:\n" + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", this.taskList.size()));
+        System.out.println(String.format("Now you have %d eva.tasks in the list.", this.taskList.size()));
     }
 
     private void deleteTask(String taskDesc) {
@@ -76,6 +76,6 @@ public class Ui {
         Task task = this.taskList.get(posToDelete);
         this.taskList.remove(posToDelete);
         System.out.println("Noted. I've removed this task: \n" + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", this.taskList.size()));
+        System.out.println(String.format("Now you have %d eva.tasks in the list.", this.taskList.size()));
     }
 }

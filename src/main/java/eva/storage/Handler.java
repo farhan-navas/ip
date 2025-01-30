@@ -1,13 +1,12 @@
-package storage;
+package eva.storage;
 
-import exceptions.TaskException;
+import eva.exceptions.TaskException;
 import java.io.FileNotFoundException;
 
-import tasks.Task;
+import eva.tasks.Task;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,13 +46,13 @@ public class Handler {
 
             try (FileWriter taskFileWriter = new FileWriter(FILE_PATH, false)) {
                 for (Task currTask : tasks) {
-                    if (currTask instanceof tasks.Event) {
+                    if (currTask instanceof eva.tasks.Event) {
                         taskFileWriter.write("E | " + (currTask.isDone() ? "1" : "0") + " | "
-                                + currTask.getName() + " | " + ((tasks.Event) currTask).getStartTime() + "-" + ((tasks.Event) currTask).getEndTime() + "\n");
-                    } else if (currTask instanceof tasks.Deadline) {
+                                + currTask.getName() + " | " + ((eva.tasks.Event) currTask).getStartTime() + "-" + ((eva.tasks.Event) currTask).getEndTime() + "\n");
+                    } else if (currTask instanceof eva.tasks.Deadline) {
                         taskFileWriter.write("D | " + (currTask.isDone() ? "1" : "0") + " | "
-                                + currTask.getName() + " | " + ((tasks.Deadline) currTask).getEndTime() + "\n");
-                    } else if (currTask instanceof tasks.Todo) {
+                                + currTask.getName() + " | " + ((eva.tasks.Deadline) currTask).getEndTime() + "\n");
+                    } else if (currTask instanceof eva.tasks.Todo) {
                         taskFileWriter.write("T | " + (currTask.isDone() ? "1" : "0") + " | "
                                 + currTask.getName() + "\n");
                     }

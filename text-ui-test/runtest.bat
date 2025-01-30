@@ -1,6 +1,6 @@
 @ECHO OFF
 
-REM create bin storage if it doesn't exist
+REM create bin eva.storage if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run

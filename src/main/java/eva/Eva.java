@@ -1,10 +1,12 @@
-import exceptions.TaskException;
-import tasks.Task;
+package eva;
+
+import eva.exceptions.TaskException;
+import eva.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import storage.Handler;
-import ui.Ui;
+import eva.storage.Handler;
+import eva.ui.Ui;
 
 public class Eva {
     public static ArrayList<Task> taskList  = new ArrayList<>();

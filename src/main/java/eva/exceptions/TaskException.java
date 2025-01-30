@@ -1,4 +1,4 @@
-package exceptions;
+package eva.exceptions;
 
 public class TaskException extends Exception {
 
