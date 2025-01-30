@@ -2,7 +2,7 @@ package tasks;
 
 import exceptions.TaskException;
 
-import java.util.Arrays;
+import java.time.LocalDate;
 
 public abstract  class Task {
     private String name;
@@ -59,11 +59,11 @@ public abstract  class Task {
         boolean isDone = split[1].trim().equals("1");
         String taskName = split[2].trim();
         if (taskType.equals("E")) {
-            String startTime = split[3].split("-")[0].trim();
-            String endTime = split[3].split("-")[1].trim();
+            LocalDate startTime = LocalDate.parse(split[3].split("-")[0].trim());
+            LocalDate endTime = LocalDate.parse(split[3].split("-")[1].trim());
             return new Event(taskName, isDone, startTime, endTime);
         } else if (taskType.equals("D")) {
-            String endTime = split[3].trim();
+            LocalDate endTime = LocalDate.parse(split[3].trim());
             return new Deadline(taskName, isDone, endTime);
         } else if (taskType.equals("T")) {
             return new Todo(taskName, isDone);

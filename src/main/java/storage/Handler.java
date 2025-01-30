@@ -47,11 +47,14 @@ public class Handler {
             try (FileWriter taskFileWriter = new FileWriter(FILE_PATH, false)) {
                 for (Task currTask : tasks) {
                     if (currTask instanceof tasks.Event) {
-                        taskFileWriter.write("E | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + " | " + ((tasks.Event) currTask).getStartTime() + "-" + ((tasks.Event) currTask).getEndTime() + "\n");
+                        taskFileWriter.write("E | " + (currTask.isDone() ? "1" : "0") + " | "
+                                + currTask.getName() + " | " + ((tasks.Event) currTask).getStartTime() + "-" + ((tasks.Event) currTask).getEndTime() + "\n");
                     } else if (currTask instanceof tasks.Deadline) {
-                        taskFileWriter.write("D | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + " | " + ((tasks.Deadline) currTask).getEndTime() + "\n");
+                        taskFileWriter.write("D | " + (currTask.isDone() ? "1" : "0") + " | "
+                                + currTask.getName() + " | " + ((tasks.Deadline) currTask).getEndTime() + "\n");
                     } else if (currTask instanceof tasks.Todo) {
-                        taskFileWriter.write("T | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName() + "\n");
+                        taskFileWriter.write("T | " + (currTask.isDone() ? "1" : "0") + " | "
+                                + currTask.getName() + "\n");
                     }
                 }
             }

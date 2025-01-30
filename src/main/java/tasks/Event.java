@@ -2,33 +2,38 @@ package tasks;
 
 import exceptions.TaskException;
 
-public class Event extends Task {
-    private String startTime;
-    private String endTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    private Event(String name, String startTime, String endTime) {
+public class Event extends Task {
+    private LocalDate startTime;
+    private LocalDate endTime;
+
+    private Event(String name, LocalDate startTime, LocalDate endTime) {
        super(name);
        this.startTime = startTime;
        this.endTime = endTime;
     }
 
-    public Event(String name, boolean isDone, String startTime, String endTime) {
+    public Event(String name, boolean isDone, LocalDate startTime, LocalDate endTime) {
         super(name, isDone);
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public String getStartTime() {
+    public LocalDate getStartTime() {
         return this.startTime;
     }
 
-    public String getEndTime() {
+    public LocalDate getEndTime() {
         return this.endTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.startTime, this.endTime);
+        String fStart = this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String fEnd = this.endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), fStart, fEnd);
     }
 
     public static Event createEvent(String taskDesc) throws TaskException {
@@ -39,8 +44,8 @@ public class Event extends Task {
         String[] split = taskDesc.split(" /from ");
         String name = split[0];
         String[] split2 = split[1].split(" /to ");
-        String startTime = split2[0];
-        String endTime = split2[1];
+        LocalDate startTime = LocalDate.parse(split2[0]);
+        LocalDate endTime = LocalDate.parse(split2[1]);
         return new Event(name, startTime, endTime);
     }
 

@@ -27,7 +27,7 @@ public class Eva {
             } else if (currInput.startsWith("unmark")) {
                 markTask(currInput, false);
             } else if (currInput.startsWith("delete")) {
-                deleteTask(Eva.taskList, currInput);
+                deleteTask(currInput);
             } else {
                 addTask(currInput);
             }
@@ -66,11 +66,11 @@ public class Eva {
         }
     }
 
-    private static void deleteTask(ArrayList<Task> taskList, String taskDesc) {
+    private static void deleteTask(String taskDesc) {
         int posToDelete = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
-        Task task = taskList.get(posToDelete);
-        taskList.remove(posToDelete);
+        Task task = Eva.taskList.get(posToDelete);
+        Eva.taskList.remove(posToDelete);
         System.out.println("Noted. I've removed this task: \n" + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
+        System.out.println(String.format("Now you have %d tasks in the list.", Eva.taskList.size()));
     }
 }
