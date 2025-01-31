@@ -1,11 +1,12 @@
 package eva;
 
-import eva.exceptions.TaskException;
-import eva.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import eva.exceptions.TaskException;
 import eva.storage.Handler;
+import eva.tasks.Task;
 import eva.ui.Ui;
 
 /**
