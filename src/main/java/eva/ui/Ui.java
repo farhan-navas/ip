@@ -1,10 +1,10 @@
 package eva.ui;
 
-import eva.exceptions.TaskException;
-import eva.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import eva.exceptions.TaskException;
+import eva.tasks.Task;
 
 /**
  * Represents the user interface of the program. Handles user input and prints messages to the user.

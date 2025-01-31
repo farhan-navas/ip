@@ -1,8 +1,8 @@
 package eva.tasks;
 
-import eva.exceptions.TaskException;
-
 import java.time.LocalDate;
+
+import eva.exceptions.TaskException;
 
 /**
  * Represents a Task object. A <code>Task</code> has a name and a status of whether it is done.

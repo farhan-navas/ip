@@ -1,9 +1,9 @@
 package eva.tasks;
 
-import eva.exceptions.TaskException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import eva.exceptions.TaskException;
 
 /**
  * Represents an Event object. An <code>Event</code> has a name, a start time and an end time.

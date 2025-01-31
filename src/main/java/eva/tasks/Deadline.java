@@ -1,9 +1,9 @@
 package eva.tasks;
 
-import eva.exceptions.TaskException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import eva.exceptions.TaskException;
 
 /**
  * Represents a task with a deadline. Extends the <code>Task</code> class.
