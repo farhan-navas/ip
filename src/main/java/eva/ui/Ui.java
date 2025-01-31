@@ -34,6 +34,8 @@ public class Ui {
                 this.markTask(currInput, false);
             } else if (currInput.startsWith("delete")) {
                 deleteTask(currInput);
+            } else if (currInput.startsWith("find")) {
+                findTask(currInput);
             } else {
                 addTask(currInput);
             }
@@ -77,5 +79,23 @@ public class Ui {
         this.taskList.remove(posToDelete);
         System.out.println("Noted. I've removed this task: \n" + task.toString());
         System.out.println(String.format("Now you have %d tasks in the list.", this.taskList.size()));
+    }
+
+    private void findTask(String taskDesc) {
+        String keyword = taskDesc.split(" ")[1];
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getName().contains(keyword)) {
+                foundTasks.add(task);
+            }
+        }
+        if (foundTasks.isEmpty()) {
+            System.out.println("No tasks found with the keyword: " + keyword);
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                System.out.println((i + 1) + ". " + foundTasks.get(i).toString());
+            }
+        }
     }
 }
