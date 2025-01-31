@@ -10,9 +10,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the loading and saving of tasks from the hard drive.
+ */
 public class Handler {
     private static final String FILE_PATH = "data/eva.txt";
 
+    /**
+     * Loads tasks from the hard drive, which is stored in a text file.
+     *
+     * @return An ArrayList of tasks loaded from the hard drive.
+     */
     public static ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -36,6 +44,11 @@ public class Handler {
         }
     }
 
+    /**
+     * Saves tasks to the hard drive, which is stored in a text file.
+     *
+     * @param tasks The ArrayList of tasks to be saved to the hard drive.
+     */
     public static void saveTasks(ArrayList<Task> tasks) {
         try {
             File taskFile = new File(FILE_PATH);

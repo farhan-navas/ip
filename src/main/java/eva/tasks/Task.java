@@ -4,42 +4,85 @@ import eva.exceptions.TaskException;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Task object. A <code>Task</code> has a name and a status of whether it is done.
+ * This is an abstract class and cannot be instantiated directly, use of its subclasses is recommended.
+ */
 public abstract  class Task {
     private String name;
     private boolean isDone;
 
+    /**
+     * Constructor for Task object.
+     *
+     * @param name name of the task.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task object.
+     *
+     * @param name name of the task.
+     * @param isDone status of the task.
+     */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Marks the task as undone.
+     */
     public void markAsUndone() {
         this.isDone = false;
     }
 
+    /**
+     * Returns the status of the task.
+     *
+     * @return true if the task is done, false otherwise.
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * Returns the name of the task.
+     *
+     * @return name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Returns the string representation of the task.
+     *
+     * @return string representation of the task.
+     */
     @Override
     public String toString() {
        return (this.isDone ? "[X] " : "[ ] ") + name;
     }
 
-    // Factory method
+    /**
+     * Factory method to create a task based on the task description.
+     *
+     * @param taskDesc description of the task.
+     * @return Task object created.
+     * @throws TaskException if the task description is invalid.
+     * @see Todo, Deadline, Event
+     */
     public static Task createTask(String taskDesc) throws TaskException {
         if (taskDesc.startsWith("todo")) {
             return Todo.createTodo(taskDesc.substring(4));
@@ -52,7 +95,13 @@ public abstract  class Task {
         }
     }
 
-    // Factory method to load task from hard drive
+    /**
+     * Loads a task from a string representation, from the hard drive.
+     *
+     * @param taskDesc string representation of the task.
+     * @return Task object created.
+     * @throws TaskException if the task description is invalid.
+     */
     public static Task loadTask(String taskDesc) throws TaskException {
         String[] split = taskDesc.split(" \\| ");
         String taskType = split[0].trim();
