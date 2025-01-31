@@ -119,6 +119,11 @@ public class Ui {
         System.out.println(String.format("Now you have %d tasks in the list.", this.taskList.size()));
     }
 
+    /**
+     * Finds a task from the task list based on the task description.
+     *
+     * @param taskDesc the task description.
+     */
     private void findTask(String taskDesc) {
         String keyword = taskDesc.split(" ")[1];
         ArrayList<Task> foundTasks = new ArrayList<>();
