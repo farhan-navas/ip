@@ -1,8 +1,8 @@
 package eva.tasks;
 
-import eva.exceptions.TaskException;
-
 import java.time.LocalDate;
+
+import eva.exceptions.TaskException;
 
 public abstract  class Task {
     private String name;

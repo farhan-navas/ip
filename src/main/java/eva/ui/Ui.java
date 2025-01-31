@@ -1,10 +1,11 @@
 package eva.ui;
 
-import eva.exceptions.TaskException;
-import eva.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import eva.exceptions.TaskException;
+import eva.tasks.Task;
 
 public class Ui {
     private final String INTRO = "Hello! I'm Eva. \nWhat can I do for you? \n";
