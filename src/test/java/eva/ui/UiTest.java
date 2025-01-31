@@ -30,18 +30,18 @@ public class UiTest {
     // Test for handleInput addTask
     @Test
     public void testHandleInput_addTask() throws TaskException {
-        String simInput = "todo read book";
+        String simInput = "todo read book\nbye\n";
         System.setIn(new ByteArrayInputStream(simInput.getBytes()));
 
         ui.handleInput(new Scanner(System.in), taskList);
 
         assertEquals(1, taskList.size());
         assertTrue(this.taskList.get(0) instanceof Todo);
-        assertEquals("read book", this.taskList.get(0).getName());
+        assertEquals(" read book", this.taskList.get(0).getName());
 
         String consoleOutput = outContent.toString();
-        assert consoleOutput.contains("Got it. I've added this task:");
-        assert consoleOutput.contains("[T][ ] read book");
-        assert consoleOutput.contains("Now you have 1 task in the list.");
+        assert consoleOutput.contains("Got it: I've added this task:");
+        assert consoleOutput.contains("[T][ ]  read book");
+        assert consoleOutput.contains("Now you have 1 tasks in the list.");
     }
 }
