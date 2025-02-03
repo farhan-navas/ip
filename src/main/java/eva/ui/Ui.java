@@ -10,8 +10,8 @@ import eva.tasks.Task;
  * Represents the user interface of the program. Handles user input and prints messages to the user.
  */
 public class Ui {
-    private final String INTRO_MESSAGE = "Hello! I'm Eva. \nWhat can I do for you? \n";
-    private final String END_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String INTRO_MESSAGE = "Hello! I'm Eva. \nWhat can I do for you? \n";
+    private static final String END_MESSAGE = "Bye. Hope to see you again soon!";
 
     private ArrayList<Task> taskList;
 
@@ -89,7 +89,8 @@ public class Ui {
             System.out.println("Nice! I've marked this task as done: \n" + this.taskList.get(posToChange).toString());
         } else {
             this.taskList.get(posToChange).markAsUndone();
-            System.out.println("Ok! I've marked this task as not done yet: \n" + this.taskList.get(posToChange).toString());
+            System.out.println("Ok! I've marked this task as not done yet: \n"
+                    + this.taskList.get(posToChange).toString());
         }
     }
 
@@ -103,7 +104,7 @@ public class Ui {
         Task task = Task.createTask(taskDesc);
         this.taskList.add(task);
         System.out.println("Got it: I've added this task:\n" + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", this.taskList.size()));
+        System.out.printf("Now you have %d tasks in the list.%n", this.taskList.size());
     }
 
     /**
@@ -116,7 +117,7 @@ public class Ui {
         Task task = this.taskList.get(posToDelete);
         this.taskList.remove(posToDelete);
         System.out.println("Noted. I've removed this task: \n" + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", this.taskList.size()));
+        System.out.printf("Now you have %d tasks in the list.%n", this.taskList.size());
     }
 
     /**

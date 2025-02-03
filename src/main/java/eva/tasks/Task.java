@@ -8,8 +8,8 @@ import eva.exceptions.TaskException;
  * Represents a Task object. A <code>Task</code> has a name and a status of whether it is done.
  * This is an abstract class and cannot be instantiated directly, use of its subclasses is recommended.
  */
-public abstract  class Task {
-    private String name;
+public abstract class Task {
+    private final String name;
     private boolean isDone;
 
     /**
@@ -72,17 +72,18 @@ public abstract  class Task {
      */
     @Override
     public String toString() {
-       return (this.isDone ? "[X] " : "[ ] ") + name;
+        return (this.isDone ? "[X] " : "[ ] ") + name;
     }
 
     /**
      * Factory method to create a task based on the task description.
      *
      * @param taskDesc description of the task.
-     *                 
      * @return Task object created.
      * @throws TaskException if the task description is invalid.
-     * @see Todo, Deadline, Event
+     * @see Todo
+     * @see Deadline
+     * @see Event
      */
     public static Task createTask(String taskDesc) throws TaskException {
         if (taskDesc.startsWith("todo")) {

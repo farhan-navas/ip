@@ -10,7 +10,7 @@ import eva.exceptions.TaskException;
  * A <code>Deadline</code> object has a name, a status of whether it is done and a deadline.
  */
 public class Deadline extends Task {
-    private LocalDate endTime;
+    private final LocalDate endTime;
 
     /**
      * Creates a new <code>Deadline</code> object with the specified name and deadline.

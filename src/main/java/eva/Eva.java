@@ -26,16 +26,15 @@ import eva.ui.Ui;
  * @since 2025-09-01
  */
 public class Eva {
-    public static ArrayList<Task> taskList = new ArrayList<>();
-    private Ui ui;
-    private Handler handler;
+    private final ArrayList<Task> taskList;
+    private final Ui ui;
 
     /**
      * Constructor for the Eva class. Initializes the Ui and Handler objects.
      */
     public Eva() {
         this.ui = new Ui();
-        this.handler = new Handler();
+        this.taskList = Handler.loadTasks();
     }
 
     /**
@@ -44,7 +43,6 @@ public class Eva {
      * @throws TaskException If there is an error loading tasks from the hard drive.
      */
     public void run() throws TaskException {
-        Eva.taskList = this.handler.loadTasks();
         this.ui.showWelcome();
         Scanner scanner = new Scanner(System.in);
 

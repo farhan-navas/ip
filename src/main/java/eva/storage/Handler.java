@@ -23,25 +23,20 @@ public class Handler {
      */
     public static ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
-        try {
-            File taskFile = new File(FILE_PATH);
-            Scanner taskScanner = new Scanner(taskFile);
-
+        try (Scanner taskScanner = new Scanner(new File(FILE_PATH))) {
             while (taskScanner.hasNextLine()) {
-               String currTaskString = taskScanner.nextLine();
-               Task currTask = Task.loadTask(currTaskString);
-               tasks.add(currTask);
+                String currTaskString = taskScanner.nextLine();
+                Task currTask = Task.loadTask(currTaskString);
+                tasks.add(currTask);
             }
-            taskScanner.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
             System.out.println("File not found!");
         } catch (TaskException e) {
             System.out.println(e.getMessage());
             System.out.println("Task format incorrect! Please refresh/check hard drive for errors");
-        } finally {
-            return tasks;
         }
+        return tasks;
     }
 
     /**
@@ -60,8 +55,9 @@ public class Handler {
             try (FileWriter taskFileWriter = new FileWriter(FILE_PATH, false)) {
                 for (Task currTask : tasks) {
                     if (currTask instanceof eva.tasks.Event) {
-                        taskFileWriter.write("E | " + (currTask.isDone() ? "1" : "0") + " | "
-                                + currTask.getName() + " | " + ((eva.tasks.Event) currTask).getStartTime() + "-" + ((eva.tasks.Event) currTask).getEndTime() + "\n");
+                        taskFileWriter.write("E | " + (currTask.isDone() ? "1" : "0") + " | " + currTask.getName()
+                                + " | " + ((eva.tasks.Event) currTask).getStartTime() + "-"
+                                + ((eva.tasks.Event) currTask).getEndTime() + "\n");
                     } else if (currTask instanceof eva.tasks.Deadline) {
                         taskFileWriter.write("D | " + (currTask.isDone() ? "1" : "0") + " | "
                                 + currTask.getName() + " | " + ((eva.tasks.Deadline) currTask).getEndTime() + "\n");

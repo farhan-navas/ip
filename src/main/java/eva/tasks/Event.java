@@ -10,8 +10,8 @@ import eva.exceptions.TaskException;
  * This class extends from the <code>Task</code> class.
  */
 public class Event extends Task {
-    private LocalDate startTime;
-    private LocalDate endTime;
+    private final LocalDate startTime;
+    private final LocalDate endTime;
 
     /**
      * Creates an Event object with the specified name, start time and end time.
