@@ -59,7 +59,7 @@ public abstract  class Task {
     /**
      * Returns the name of the task.
      *
-     * @return name
+     * @return name.
      */
     public String getName() {
         return this.name;
@@ -79,6 +79,7 @@ public abstract  class Task {
      * Factory method to create a task based on the task description.
      *
      * @param taskDesc description of the task.
+     *                 
      * @return Task object created.
      * @throws TaskException if the task description is invalid.
      * @see Todo, Deadline, Event

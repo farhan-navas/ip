@@ -26,7 +26,7 @@ import eva.ui.Ui;
  * @since 2025-09-01
  */
 public class Eva {
-    public static ArrayList<Task> taskList  = new ArrayList<>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
     private Ui ui;
     private Handler handler;
 

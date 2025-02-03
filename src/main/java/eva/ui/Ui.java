@@ -10,8 +10,8 @@ import eva.tasks.Task;
  * Represents the user interface of the program. Handles user input and prints messages to the user.
  */
 public class Ui {
-    private final String INTRO = "Hello! I'm Eva. \nWhat can I do for you? \n";
-    private final String END = "Bye. Hope to see you again soon!";
+    private final String INTRO_MESSAGE = "Hello! I'm Eva. \nWhat can I do for you? \n";
+    private final String END_MESSAGE = "Bye. Hope to see you again soon!";
 
     private ArrayList<Task> taskList;
 
@@ -19,14 +19,14 @@ public class Ui {
      * Prints the default Eva welcome message.
      */
     public void showWelcome() {
-        System.out.println(INTRO);
+        System.out.println(INTRO_MESSAGE);
     }
 
     /**
      * Prints the default Eva goodbye message.
      */
     public void showEnd() {
-        System.out.println(END);
+        System.out.println(END_MESSAGE);
     }
 
     /**
@@ -96,7 +96,7 @@ public class Ui {
     /**
      * Creates a task  based on the task description and adds it to the task list.
      *
-     * @param taskDesc the task description.
+     * @param taskDesc the task description.s
      * @throws TaskException if the task description is invalid.
      */
     private void addTask(String taskDesc) throws TaskException {

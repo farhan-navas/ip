@@ -11,7 +11,7 @@ public class Todo extends Task {
     /**
      * Creates a new <code>Todo</code> object with the specified name.
      *
-     * @param name name of the todo
+     * @param name name of the todo.
      */
     private Todo(String name) {
         super(name);
@@ -20,8 +20,8 @@ public class Todo extends Task {
     /**
      * Creates a new <code>Todo</code> object with the specified name and status.
      *
-     * @param name name of the todo
-     * @param isDone status of the todo
+     * @param name name of the todo.
+     * @param isDone status of the todo.
      */
     public Todo(String name, boolean isDone) {
         super(name, isDone);
@@ -40,7 +40,8 @@ public class Todo extends Task {
     /**
      * Factory method to create a new <code>Todo</code> object based on the task description.
      *
-     * @param taskDesc description of the todo
+     * @param taskDesc description of the todo.
+     *
      * @return new <code>Todo</code> object
      * @throws TaskException if the description of the todo is empty
      */

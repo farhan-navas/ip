@@ -15,8 +15,8 @@ public class Deadline extends Task {
     /**
      * Creates a new <code>Deadline</code> object with the specified name and deadline.
      *
-     * @param name name of the deadline
-     * @param endTime deadline of the deadline
+     * @param name name of the deadline.
+     * @param endTime deadline of the deadline.
      */
     private Deadline(String name, LocalDate endTime) {
         super(name);
@@ -26,9 +26,9 @@ public class Deadline extends Task {
     /**
      * Creates a new <code>Deadline</code> object with the specified name, status and deadline.
      *
-     * @param name name of the deadline
-     * @param isDone status of the deadline
-     * @param endTime deadline of the deadline
+     * @param name name of the deadline.
+     * @param isDone status of the deadline.
+     * @param endTime deadline of the deadline.
      */
     public Deadline(String name, boolean isDone, LocalDate endTime) {
         super(name, isDone);
@@ -38,7 +38,7 @@ public class Deadline extends Task {
     /**
      * Returns the string representation of the deadline.
      *
-     * @return string representation of the deadline
+     * @return string representation of the deadline.
      */
     @Override
     public String toString() {
@@ -49,7 +49,7 @@ public class Deadline extends Task {
     /**
      * Returns the deadline of the Deadline object.
      *
-     * @return deadline of the Deadline object
+     * @return deadline of the Deadline object.
      */
     public LocalDate getEndTime() {
         return this.endTime;
@@ -58,9 +58,10 @@ public class Deadline extends Task {
     /**
      * Factory method to create a new <code>Deadline</code> object based on the task description.
      *
-     * @param taskDesc task description of the deadline
-     * @return new <code>Deadline</code> object
-     * @throws TaskException if the task description is in an invalid format
+     * @param taskDesc task description of the deadline.
+     *
+     * @return new <code>Deadline</code> object.
+     * @throws TaskException if the task description is in an invalid format.
      */
     public static Deadline createDeadline(String taskDesc) throws TaskException {
         if (!taskDesc.contains(" /by ")) {

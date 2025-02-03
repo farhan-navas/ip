@@ -21,9 +21,9 @@ public class Event extends Task {
      * @param endTime end time of the event.
      */
     private Event(String name, LocalDate startTime, LocalDate endTime) {
-       super(name);
-       this.startTime = startTime;
-       this.endTime = endTime;
+        super(name);
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
     /**
      * Creates an Event object with the specified name, status, start time and end time.
@@ -73,6 +73,7 @@ public class Event extends Task {
      * Factory method to create a new <code>Event</code> object based on the task description.
      *
      * @param taskDesc description of the event.
+     *
      * @return Event object created.
      * @throws TaskException if the task description is in an invalid format.
      */
