@@ -8,15 +8,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Main class to start the application.
+ * A GUI for using Eva using FXML.
  */
 public class Main extends Application {
     private Eva eva = new Eva();
 
     /**
-     * Main method to run the Eva program.
+     * Starts the application.
      *
-     * @param stage Command line arguments.
+     * @param stage The stage to start the application.
      */
     @Override
     public void start(Stage stage) {
@@ -25,6 +25,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setMinHeight(220);
+            stage.setMinWidth(417);
             fxmlLoader.<MainWindow>getController().setEva(eva);
             stage.show();
         } catch (IOException e) {

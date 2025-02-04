@@ -31,9 +31,8 @@ public class UiTest {
     @Test
     public void testHandleInput_addTask() throws TaskException {
         String simInput = "todo read book\nbye\n";
-        System.setIn(new ByteArrayInputStream(simInput.getBytes()));
 
-        ui.handleInput(new Scanner(System.in), taskList);
+        ui.handleInput(simInput, taskList);
 
         assertEquals(1, taskList.size());
         assertTrue(this.taskList.get(0) instanceof Todo);

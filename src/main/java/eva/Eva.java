@@ -2,7 +2,6 @@ package eva;
 
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import eva.exceptions.TaskException;
 import eva.storage.Handler;
@@ -28,6 +27,7 @@ import eva.ui.Ui;
 public class Eva {
     private final ArrayList<Task> taskList;
     private final Ui ui;
+    private String commandType;
 
     /**
      * Constructor for the Eva class. Initializes the Ui and Handler objects.
@@ -38,36 +38,22 @@ public class Eva {
     }
 
     /**
-     * Runs the Eva program. Loads tasks from the hard drive, handles user input, and saves tasks to the hard drive.
-     *
-     * @throws TaskException If there is an error loading tasks from the hard drive.
-     */
-    public void run() throws TaskException {
-        this.ui.showWelcome();
-        Scanner scanner = new Scanner(System.in);
-
-        this.ui.handleInput(scanner, this.taskList);
-        this.ui.showEnd();
-        Handler.saveTasks(this.taskList);
-    }
-
-    /**
-     * Returns a response to the user input.
+     * Gets the response from Eva based on the user input.
      *
      * @param input The user input.
-     * @return The response to the user input.
+     * @return The response from Eva.
      */
     public String getResponse(String input) {
-        return "Eva heard: " + input;
+        try {
+            return this.ui.handleInput(input, this.taskList);
+        } catch (TaskException e) {
+            return e.getMessage();
+        }
+
     }
 
-    /**
-     * Main method to run the Eva program.
-     *
-     * @param args Command line arguments.
-     * @throws TaskException If there is an error loading tasks from the hard drive.
-     */
-    public static void main(String[] args) throws TaskException {
-        new Eva().run();
+    // not implemented yet!
+    public String getCommandType() {
+        return commandType;
     }
 }

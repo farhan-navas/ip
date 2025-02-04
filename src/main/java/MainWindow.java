@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Represents the main window of the Eva program. Contains the user interface for the program.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -16,12 +19,14 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Eva eva;
 
     private Image manImage = new Image(this.getClass().getResourceAsStream("/images/male.png"));
     private Image womanImage = new Image(this.getClass().getResourceAsStream("/images/female.png"));
 
+    /**
+     * Initializes the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -36,6 +41,9 @@ public class MainWindow extends AnchorPane {
         this.eva = e;
     }
 
+    /**
+     * Handles the user input and generates a response from Eva.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

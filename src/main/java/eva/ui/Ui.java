@@ -1,7 +1,6 @@
 package eva.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import eva.exceptions.TaskException;
 import eva.tasks.Task;
@@ -18,62 +17,56 @@ public class Ui {
     /**
      * Prints the default Eva welcome message.
      */
-    public void showWelcome() {
-        System.out.println(INTRO_MESSAGE);
+    public String showWelcome() {
+        return INTRO_MESSAGE;
     }
 
     /**
      * Prints the default Eva goodbye message.
      */
-    public void showEnd() {
-        System.out.println(END_MESSAGE);
+    public String showEnd() {
+        return END_MESSAGE;
     }
 
     /**
-     * Handles the user input and performs the necessary actions. Actions include adding tasks, marking tasks,
-     * deleting tasks, listing tasks and exiting the program.
+     * Handles the user input and processes the tasks based on the input.
      *
-     * @param scanner the scanner object to read user input.
-     * @param taskList the list of tasks to be updated.
-     * @throws TaskException if the task description is invalid.
+     * @param currInput The current user input.
+     * @param taskList The list of tasks to be processed.
+     * @throws TaskException If there is an error processing the tasks.
      */
-    public void handleInput(Scanner scanner, ArrayList<Task> taskList) throws TaskException {
+    public String handleInput(String currInput, ArrayList<Task> taskList) throws TaskException {
         this.taskList = taskList;
-        while (true) {
-            String currInput = scanner.nextLine().trim();
-            if (currInput.equals("bye")) {
-                break;
-            } else if (currInput.equals("list")) {
-                this.printTaskList();
-            } else if (currInput.startsWith("mark")) {
-                this.markTask(currInput, true);
-            } else if (currInput.startsWith("unmark")) {
-                this.markTask(currInput, false);
-            } else if (currInput.startsWith("delete")) {
-                deleteTask(currInput);
-            } else if (currInput.startsWith("find")) {
-                findTask(currInput);
-            } else {
-                addTask(currInput);
-            }
+        if (currInput.equals("bye")) {
+            return END_MESSAGE;
+        } else if (currInput.equals("list")) {
+            return this.printTaskList();
+        } else if (currInput.startsWith("mark")) {
+            return this.markTask(currInput, true);
+        } else if (currInput.startsWith("unmark")) {
+            return this.markTask(currInput, false);
+        } else if (currInput.startsWith("delete")) {
+            return this.deleteTask(currInput);
+        } else if (currInput.startsWith("find")) {
+            return this.findTask(currInput);
+        } else {
+            return this.addTask(currInput);
         }
-
-        scanner.close();
     }
 
     /**
      * Prints the list of tasks in the task list, if it is not empty.
      * If the task list is empty, prints a message to inform the user.
      */
-    private void printTaskList() {
+    private String printTaskList() {
         if (this.taskList.isEmpty()) {
-            System.out.println("You have no tasks in your list!");
-            return;
+            return "You have no tasks in your list!";
         }
-        System.out.println("Here are the tasks in your list:");
+        String result = "Here are the tasks in your list: \n";
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + this.taskList.get(i).toString());
+            result += (i + 1) + ". " + this.taskList.get(i).toString() + "\n";
         }
+        return result;
     }
 
     /**
@@ -82,15 +75,15 @@ public class Ui {
      * @param taskDesc the task description.
      * @param isDone true if the task is to be marked as done, false otherwise.
      */
-    private void markTask(String taskDesc, boolean isDone) {
+    private String markTask(String taskDesc, boolean isDone) {
         int posToChange = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
         if (isDone) {
             this.taskList.get(posToChange).markAsDone();
-            System.out.println("Nice! I've marked this task as done: \n" + this.taskList.get(posToChange).toString());
+            return "Nice! I've marked this task as done: \n" + this.taskList.get(posToChange).toString();
         } else {
             this.taskList.get(posToChange).markAsUndone();
-            System.out.println("Ok! I've marked this task as not done yet: \n"
-                    + this.taskList.get(posToChange).toString());
+            return "Ok! I've marked this task as not done yet: \n"
+                    + this.taskList.get(posToChange).toString();
         }
     }
 
@@ -100,11 +93,12 @@ public class Ui {
      * @param taskDesc the task description.s
      * @throws TaskException if the task description is invalid.
      */
-    private void addTask(String taskDesc) throws TaskException {
+    private String addTask(String taskDesc) throws TaskException {
         Task task = Task.createTask(taskDesc);
         this.taskList.add(task);
-        System.out.println("Got it: I've added this task:\n" + task.toString());
-        System.out.printf("Now you have %d tasks in the list.%n", this.taskList.size());
+        String result = "Got it: I've added this task:\n" + task.toString() + "\n";
+        result += String.format("Now you have %d tasks in the list.", this.taskList.size());
+        return result;
     }
 
     /**
@@ -112,12 +106,13 @@ public class Ui {
      *
      * @param taskDesc the task description.
      */
-    private void deleteTask(String taskDesc) {
+    private String deleteTask(String taskDesc) {
         int posToDelete = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
         Task task = this.taskList.get(posToDelete);
         this.taskList.remove(posToDelete);
-        System.out.println("Noted. I've removed this task: \n" + task.toString());
-        System.out.printf("Now you have %d tasks in the list.%n", this.taskList.size());
+        String result = "Noted. I've removed this task: \n" + task.toString();
+        result += String.format("Now you have %d tasks in the list.%n", this.taskList.size());
+        return result;
     }
 
     /**
@@ -125,8 +120,9 @@ public class Ui {
      *
      * @param taskDesc the task description.
      */
-    private void findTask(String taskDesc) {
+    private String findTask(String taskDesc) {
         String keyword = taskDesc.split(" ")[1];
+        String result = "";
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : this.taskList) {
             if (task.getName().contains(keyword)) {
@@ -134,12 +130,14 @@ public class Ui {
             }
         }
         if (foundTasks.isEmpty()) {
-            System.out.println("No tasks found with the keyword: " + keyword);
+            result += "No tasks found with the keyword: " + keyword;
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            result += "Here are the matching tasks in your list: \n";
             for (int i = 0; i < foundTasks.size(); i++) {
-                System.out.println((i + 1) + ". " + foundTasks.get(i).toString());
+                result += (i + 1) + ". " + foundTasks.get(i).toString();
             }
         }
+
+        return result;
     }
 }
