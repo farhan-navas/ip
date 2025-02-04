@@ -52,6 +52,16 @@ public class Eva {
     }
 
     /**
+     * Returns a response to the user input.
+     *
+     * @param input The user input.
+     * @return The response to the user input.
+     */
+    public String getResponse(String input) {
+        return "Eva heard: " + input;
+    }
+
+    /**
      * Main method to run the Eva program.
      *
      * @param args Command line arguments.
