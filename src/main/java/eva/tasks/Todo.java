@@ -47,7 +47,7 @@ public class Todo extends Task {
      */
     public static Todo createTodo(String taskDesc) throws TaskException {
         if (taskDesc.isBlank()) {
-            throw new TaskException("The description of a todo cannot be empty.");
+            throw new TaskException("Invalid todo format!");
         }
 
         return new Todo(taskDesc);

@@ -35,22 +35,20 @@ public class Ui {
      * @param taskList The list of tasks to be processed.
      * @throws TaskException If there is an error processing the tasks.
      */
-    public String handleInput(String currInput, ArrayList<Task> taskList) throws TaskException {
+    public String[] handleInput(String currInput, ArrayList<Task> taskList) throws TaskException {
         this.taskList = taskList;
-        if (currInput.equals("bye")) {
-            return END_MESSAGE;
-        } else if (currInput.equals("list")) {
-            return this.printTaskList();
+        if (currInput.equals("list")) {
+            return new String[] {this.printTaskList(), "default"};
         } else if (currInput.startsWith("mark")) {
-            return this.markTask(currInput, true);
+            return new String[] {this.markTask(currInput, true), "ChangeMarkCommand"};
         } else if (currInput.startsWith("unmark")) {
-            return this.markTask(currInput, false);
+            return new String[] {this.markTask(currInput, false), "ChangeMarkCommand"};
         } else if (currInput.startsWith("delete")) {
-            return this.deleteTask(currInput);
+            return new String[] {this.deleteTask(currInput), "DeleteCommand"};
         } else if (currInput.startsWith("find")) {
-            return this.findTask(currInput);
+            return new String[] {this.findTask(currInput), "default"};
         } else {
-            return this.addTask(currInput);
+            return new String[] {this.addTask(currInput), "AddCommand"};
         }
     }
 
@@ -134,7 +132,7 @@ public class Ui {
         } else {
             result += "Here are the matching tasks in your list: \n";
             for (int i = 0; i < foundTasks.size(); i++) {
-                result += (i + 1) + ". " + foundTasks.get(i).toString();
+                result += (i + 1) + ". " + foundTasks.get(i).toString() + "\n";
             }
         }
 

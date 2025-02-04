@@ -45,14 +45,16 @@ public class Eva {
      */
     public String getResponse(String input) {
         try {
-            return this.ui.handleInput(input, this.taskList);
+            String[] response = this.ui.handleInput(input, this.taskList);
+            this.commandType = response[1];
+            return response[0];
         } catch (TaskException e) {
             return e.getMessage();
+        } finally {
+            Handler.saveTasks(this.taskList);
         }
-
     }
 
-    // not implemented yet!
     public String getCommandType() {
         return commandType;
     }

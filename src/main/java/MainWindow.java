@@ -1,4 +1,5 @@
 import eva.Eva;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -47,10 +48,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
+        // temporary fix: close the application when the user types "bye"
+        if (input.equalsIgnoreCase("bye")) {
+            Platform.exit();
+        }
+
         String response = eva.getResponse(input);
+        String commandType = eva.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, manImage),
-                DialogBox.getEvaDialog(response, womanImage)
+                DialogBox.getEvaDialog(response, womanImage, commandType)
         );
         userInput.clear();
     }
