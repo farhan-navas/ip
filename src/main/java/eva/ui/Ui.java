@@ -108,7 +108,7 @@ public class Ui {
         int posToDelete = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
         Task task = this.taskList.get(posToDelete);
         this.taskList.remove(posToDelete);
-        String result = "Noted. I've removed this task: \n" + task.toString();
+        String result = "Noted. I've removed this task: \n" + task.toString() + "\n";
         result += String.format("Now you have %d tasks in the list.%n", this.taskList.size());
         return result;
     }

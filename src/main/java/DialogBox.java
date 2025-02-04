@@ -72,10 +72,12 @@ public class DialogBox extends HBox {
         }
     }
 
-    public static DialogBox getEvaDialog(String text, Image img, String commandType) {
+    public static DialogBox getEvaDialog(String text, Image img, String... commandType) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.changeDialogStyle(commandType);
+        if (commandType.length > 0) {
+            db.changeDialogStyle(commandType[0]);
+        }
         return db;
     }
 
