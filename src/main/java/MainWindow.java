@@ -39,6 +39,7 @@ public class MainWindow extends AnchorPane {
      * @param e The Eva object to be set.
      */
     public void setEva(Eva e) {
+        assert e != null : "Eva object is null!";
         this.eva = e;
     }
 
@@ -48,14 +49,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert input != null : "User input is null!";
 
-        // temporary fix: close the application when the user types "bye"
         if (input.equalsIgnoreCase("bye")) {
             Platform.exit();
         }
 
         String response = eva.getResponse(input);
+        assert response != null : "Response is null!";
+
         String commandType = eva.getCommandType();
+        assert commandType != null : "Command type is null!";
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, manImage),
                 DialogBox.getEvaDialog(response, womanImage, commandType)
