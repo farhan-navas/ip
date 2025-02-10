@@ -22,6 +22,10 @@ public class Event extends Task {
      */
     private Event(String name, LocalDate startTime, LocalDate endTime) {
         super(name);
+        assert startTime != null : "Start time of event cannot be null!";
+        assert endTime != null : "End time of event cannot be null!";
+        assert startTime.isBefore(endTime) : "Start time of event cannot be after end time!";
+
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -35,6 +39,10 @@ public class Event extends Task {
      */
     public Event(String name, boolean isDone, LocalDate startTime, LocalDate endTime) {
         super(name, isDone);
+        assert startTime != null : "Start time of event cannot be null!";
+        assert endTime != null : "End time of event cannot be null!";
+        assert startTime.isBefore(endTime) : "Start time of event cannot be after end time!";
+
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -78,17 +86,28 @@ public class Event extends Task {
      * @throws TaskException if the task description is in an invalid format.
      */
     public static Event createEvent(String taskDesc) throws TaskException {
+        assert taskDesc != null : "Task description cannot be null!";
+
         if (!taskDesc.contains(" /from ") || !taskDesc.contains(" /to ")) {
             throw new TaskException("Invalid event format!");
         }
 
         String[] split = taskDesc.split(" /from ");
+        assert split.length == 2 : "Invalid event format!";
+
         String name = split[0];
         String[] split2 = split[1].split(" /to ");
+        assert split2.length == 2 : "Invalid event format! Event name should contain /from and /to!";
+
         LocalDate startTime = LocalDate.parse(split2[0]);
         LocalDate endTime = LocalDate.parse(split2[1]);
-        return new Event(name, startTime, endTime);
-    }
+        assert startTime != null : "Start time of event cannot be null!";
+        assert endTime != null : "End time of event cannot be null!";
+        assert startTime.isBefore(endTime) : "Start time of event cannot be after end time!";
 
+        Event newEvent = new Event(name, startTime, endTime);
+        assert newEvent != null : "Event object cannot be null!";
+        return newEvent;
+    }
 }
 

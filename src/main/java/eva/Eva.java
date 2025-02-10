@@ -35,6 +35,9 @@ public class Eva {
     public Eva() {
         this.ui = new Ui();
         this.taskList = Handler.loadTasks();
+
+        assert ui != null : "Ui object is null!";
+        assert taskList != null : "Task list is null!";
     }
 
     /**
@@ -44,9 +47,15 @@ public class Eva {
      * @return The response from Eva.
      */
     public String getResponse(String input) {
+        assert input != null : "User input is null!";
+
         try {
             String[] response = this.ui.handleInput(input, this.taskList);
+            assert response != null : "Response is null!";
+
             this.commandType = response[1];
+            assert commandType != null : "Command type is null!";
+
             return response[0];
         } catch (TaskException e) {
             return e.getMessage();

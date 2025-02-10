@@ -15,6 +15,7 @@ public class Todo extends Task {
      */
     private Todo(String name) {
         super(name);
+        assert name != null : "Todo name is null!";
     }
 
     /**
@@ -25,6 +26,7 @@ public class Todo extends Task {
      */
     public Todo(String name, boolean isDone) {
         super(name, isDone);
+        assert name != null : "Todo name is null!";
     }
 
     /**
@@ -46,10 +48,14 @@ public class Todo extends Task {
      * @throws TaskException if the description of the todo is empty
      */
     public static Todo createTodo(String taskDesc) throws TaskException {
+        assert taskDesc != null : "Task description is null!";
+
         if (taskDesc.isBlank()) {
             throw new TaskException("Invalid todo format!");
         }
+        Todo newTodo = new Todo(taskDesc);
+        assert newTodo != null : "New todo object is null!";
 
-        return new Todo(taskDesc);
+        return newTodo;
     }
 }

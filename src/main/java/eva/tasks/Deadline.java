@@ -20,6 +20,8 @@ public class Deadline extends Task {
      */
     private Deadline(String name, LocalDate endTime) {
         super(name);
+        assert endTime != null : "End time of deadline cannot be null!";
+
         this.endTime = endTime;
     }
 
@@ -32,6 +34,8 @@ public class Deadline extends Task {
      */
     public Deadline(String name, boolean isDone, LocalDate endTime) {
         super(name, isDone);
+        assert endTime != null : "End time of deadline cannot be null!";
+
         this.endTime = endTime;
     }
 
@@ -64,12 +68,20 @@ public class Deadline extends Task {
      * @throws TaskException if the task description is in an invalid format.
      */
     public static Deadline createDeadline(String taskDesc) throws TaskException {
+        assert taskDesc != null : "Task description cannot be null!";
+
         if (!taskDesc.contains(" /by ")) {
             throw new TaskException("Invalid deadline format!");
         }
 
         String[] split = taskDesc.split(" /by ");
+        assert split.length == 2 : "Invalid deadline format!";
+
         LocalDate endTime = LocalDate.parse(split[1]);
-        return new Deadline(split[0], endTime);
+        assert endTime != null : "End time of deadline cannot be null!";
+
+        Deadline newDeadline = new Deadline(split[0], endTime);
+        assert newDeadline != null : "New deadline cannot be null!";
+        return newDeadline;
     }
 }

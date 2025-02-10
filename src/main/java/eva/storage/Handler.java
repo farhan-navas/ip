@@ -26,6 +26,7 @@ public class Handler {
         try (Scanner taskScanner = new Scanner(new File(FILE_PATH))) {
             while (taskScanner.hasNextLine()) {
                 String currTaskString = taskScanner.nextLine();
+                assert currTaskString != null && !currTaskString.isEmpty() : "Task string is empty!";
                 Task currTask = Task.loadTask(currTaskString);
                 tasks.add(currTask);
             }
@@ -36,6 +37,8 @@ public class Handler {
             System.out.println(e.getMessage());
             System.out.println("Task format incorrect! Please refresh/check hard drive for errors");
         }
+
+        assert tasks != null : "Loaded task list is null!";
         return tasks;
     }
 
@@ -45,6 +48,8 @@ public class Handler {
      * @param tasks The ArrayList of tasks to be saved to the hard drive.
      */
     public static void saveTasks(ArrayList<Task> tasks) {
+        assert tasks != null : "Task list is null!";
+
         try {
             File taskFile = new File(FILE_PATH);
             if (!taskFile.exists()) {
