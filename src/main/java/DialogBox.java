@@ -29,13 +29,19 @@ public class DialogBox extends HBox {
      * @param img The image to be displayed in the dialog box.
      */
     private DialogBox(String text, Image img) {
+        assert text != null : "Text is null!";
+        assert img != null : "Image is null!";
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            assert fxmlLoader != null : "FXML loader is null!";
+
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Error loading DialogBox!");
         }
 
         dialog.setText(text);

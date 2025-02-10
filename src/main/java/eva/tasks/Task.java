@@ -19,6 +19,7 @@ public abstract class Task {
      * @param name name of the task.
      */
     public Task(String name) {
+        assert name != null : "Task name cannot be null!";
         this.name = name;
         this.isDone = false;
     }
@@ -26,10 +27,11 @@ public abstract class Task {
     /**
      * Constructor for Task object.
      *
-     * @param name name of the task.
+     * @param name   name of the task.
      * @param isDone status of the task.
      */
     public Task(String name, boolean isDone) {
+        assert name != null : "Task name cannot be null!";
         this.name = name;
         this.isDone = isDone;
     }
@@ -38,6 +40,7 @@ public abstract class Task {
      * Marks the task as done.
      */
     public void markAsDone() {
+        assert !this.isDone : "Task is already done!";
         this.isDone = true;
     }
 
@@ -45,6 +48,7 @@ public abstract class Task {
      * Marks the task as undone.
      */
     public void markAsUndone() {
+        assert this.isDone : "Task is already undone!";
         this.isDone = false;
     }
 
@@ -87,6 +91,7 @@ public abstract class Task {
      * @see Event
      */
     public static Task createTask(String taskDesc) throws TaskException {
+        assert taskDesc != null : "Task description cannot be null!";
         if (taskDesc.startsWith("todo")) {
             return Todo.createTodo(taskDesc.substring(4));
         } else if (taskDesc.startsWith("deadline")) {
@@ -106,7 +111,9 @@ public abstract class Task {
      * @throws TaskException if the task description is invalid.
      */
     public static Task loadTask(String taskDesc) throws TaskException {
+        assert taskDesc != null : "Task description cannot be null!";
         String[] split = taskDesc.split(" \\| ");
+        assert split.length >= 3 : "Invalid task format!";
         String taskType = split[0].trim();
         boolean isDone = split[1].trim().equals("1");
         String taskName = split[2].trim();
@@ -127,5 +134,4 @@ public abstract class Task {
         default -> throw new TaskException("Invalid task type!");
         };
     }
-
 }

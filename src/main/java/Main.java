@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * A GUI for using Eva using FXML.
  */
 public class Main extends Application {
-    private Eva eva = new Eva();
+    private final Eva eva = new Eva();
 
     /**
      * Starts the application.
@@ -20,9 +20,15 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
+        assert stage != null : "Stage is null!";
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            assert fxmlLoader != null : "FXML loader is null!";
+
             AnchorPane ap = fxmlLoader.load();
+            assert ap != null : "AnchorPane is null!";
+
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setMinHeight(220);
@@ -30,7 +36,9 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setEva(eva);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Error starting Eva!");
+            assert false : "IOException occurred while loading FXML!" + e.getMessage();
         }
     }
 }
