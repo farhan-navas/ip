@@ -1,6 +1,7 @@
 package eva.tasks;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import eva.exceptions.TaskException;
 
@@ -109,18 +110,22 @@ public abstract class Task {
         String taskType = split[0].trim();
         boolean isDone = split[1].trim().equals("1");
         String taskName = split[2].trim();
-        if (taskType.equals("E")) {
-            LocalDate startTime = LocalDate.parse(split[3].split("-")[0].trim());
-            LocalDate endTime = LocalDate.parse(split[3].split("-")[1].trim());
-            return new Event(taskName, isDone, startTime, endTime);
-        } else if (taskType.equals("D")) {
-            LocalDate endTime = LocalDate.parse(split[3].trim());
-            return new Deadline(taskName, isDone, endTime);
-        } else if (taskType.equals("T")) {
-            return new Todo(taskName, isDone);
-        }
 
-        throw new TaskException("Invalid task type!");
+        return switch (taskType) {
+        case "E" -> {
+            LocalDate[] times = Arrays.stream(split[3].split("-"))
+                    .map(String::trim)
+                    .map(LocalDate::parse)
+                    .toArray(LocalDate[]::new);
+            yield new Event(taskName, isDone, times[0], times[1]);
+        }
+        case "D" -> {
+            LocalDate endTime = LocalDate.parse(split[3].trim());
+            yield new Deadline(taskName, isDone, endTime);
+        }
+        case "T" -> new Todo(taskName, isDone);
+        default -> throw new TaskException("Invalid task type!");
+        };
     }
 
 }

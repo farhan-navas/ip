@@ -60,11 +60,10 @@ public class Ui {
         if (this.taskList.isEmpty()) {
             return "You have no tasks in your list!";
         }
-        String result = "Here are the tasks in your list: \n";
-        for (int i = 0; i < this.taskList.size(); i++) {
-            result += (i + 1) + ". " + this.taskList.get(i).toString() + "\n";
-        }
-        return result;
+
+        return this.taskList.stream()
+                .map(task -> (this.taskList.indexOf(task) + 1) + ". " + task)
+                .reduce("Here are the tasks in your list: \n", (acc, task) -> acc + task + "\n");
     }
 
     /**
@@ -120,22 +119,13 @@ public class Ui {
      */
     private String findTask(String taskDesc) {
         String keyword = taskDesc.split(" ")[1];
-        String result = "";
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task task : this.taskList) {
-            if (task.getName().contains(keyword)) {
-                foundTasks.add(task);
-            }
-        }
-        if (foundTasks.isEmpty()) {
-            result += "No tasks found with the keyword: " + keyword;
-        } else {
-            result += "Here are the matching tasks in your list: \n";
-            for (int i = 0; i < foundTasks.size(); i++) {
-                result += (i + 1) + ". " + foundTasks.get(i).toString() + "\n";
-            }
-        }
+        String result = this.taskList.stream()
+                .filter(task -> task.getName().contains(keyword))
+                .map(task -> (this.taskList.indexOf(task) + 1) + ". " + task)
+                .reduce("Here are the matching tasks in your list: \n", (acc, task) -> acc + task + "\n");
 
-        return result;
+        return result.equals("Here are the matching tasks in your list: \n")
+                ? "No tasks found with the keyword: " + keyword
+                : result;
     }
 }
