@@ -35,9 +35,6 @@ public class Eva {
     public Eva() {
         this.ui = new Ui();
         this.taskList = Handler.loadTasks();
-
-        assert ui != null : "Ui object is null!";
-        assert taskList != null : "Task list is null!";
     }
 
     /**

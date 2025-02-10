@@ -34,8 +34,6 @@ public class DialogBox extends HBox {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            assert fxmlLoader != null : "FXML loader is null!";
-
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

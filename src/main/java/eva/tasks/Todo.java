@@ -15,7 +15,6 @@ public class Todo extends Task {
      */
     private Todo(String name) {
         super(name);
-        assert name != null : "Todo name is null!";
     }
 
     /**
@@ -26,7 +25,6 @@ public class Todo extends Task {
      */
     public Todo(String name, boolean isDone) {
         super(name, isDone);
-        assert name != null : "Todo name is null!";
     }
 
     /**

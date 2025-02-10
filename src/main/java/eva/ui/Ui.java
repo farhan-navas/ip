@@ -134,7 +134,7 @@ public class Ui {
 
         String keyword = taskDesc.split(" ")[1];
         assert keyword != null && !keyword.isEmpty() : "Keyword is null!";
-      
+
         String result = this.taskList.stream()
                 .filter(task -> task.getName().contains(keyword))
                 .map(task -> (this.taskList.indexOf(task) + 1) + ". " + task)

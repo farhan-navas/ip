@@ -24,8 +24,6 @@ public class Main extends Application {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            assert fxmlLoader != null : "FXML loader is null!";
-
             AnchorPane ap = fxmlLoader.load();
             assert ap != null : "AnchorPane is null!";
 

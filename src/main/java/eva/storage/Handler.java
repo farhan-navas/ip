@@ -38,7 +38,6 @@ public class Handler {
             System.out.println("Task format incorrect! Please refresh/check hard drive for errors");
         }
 
-        assert tasks != null : "Loaded task list is null!";
         return tasks;
     }
 
