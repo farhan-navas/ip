@@ -65,11 +65,10 @@ public class Ui {
         if (this.taskList.isEmpty()) {
             return "You have no tasks in your list!";
         }
-        StringBuilder result = new StringBuilder("Here are the tasks in your list: \n");
-        for (int i = 0; i < this.taskList.size(); i++) {
-            result.append(i + 1).append(". ").append(this.taskList.get(i).toString()).append("\n");
-        }
-        return result.toString();
+
+        return this.taskList.stream()
+                .map(task -> (this.taskList.indexOf(task) + 1) + ". " + task)
+                .reduce("Here are the tasks in your list: \n", (acc, task) -> acc + task + "\n");
     }
 
     /**
@@ -134,24 +133,15 @@ public class Ui {
         assert taskDesc != null : "Task description is null!";
 
         String keyword = taskDesc.split(" ")[1];
-        StringBuilder result = new StringBuilder();
         assert keyword != null && !keyword.isEmpty() : "Keyword is null!";
+      
+        String result = this.taskList.stream()
+                .filter(task -> task.getName().contains(keyword))
+                .map(task -> (this.taskList.indexOf(task) + 1) + ". " + task)
+                .reduce("Here are the matching tasks in your list: \n", (acc, task) -> acc + task + "\n");
 
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task task : this.taskList) {
-            if (task.getName().contains(keyword)) {
-                foundTasks.add(task);
-            }
-        }
-        if (foundTasks.isEmpty()) {
-            result.append("No tasks found with the keyword: ").append(keyword);
-        } else {
-            result.append("Here are the matching tasks in your list: \n");
-            for (int i = 0; i < foundTasks.size(); i++) {
-                result.append(i + 1).append(". ").append(foundTasks.get(i).toString()).append("\n");
-            }
-        }
-
-        return result.toString();
+        return result.equals("Here are the matching tasks in your list: \n")
+                ? "No tasks found with the keyword: " + keyword
+                : result;
     }
 }
