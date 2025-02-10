@@ -22,8 +22,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     private Eva eva;
 
-    private Image manImage = new Image(this.getClass().getResourceAsStream("/images/male.png"));
-    private Image womanImage = new Image(this.getClass().getResourceAsStream("/images/female.png"));
+    private final Image manImage = new Image(this.getClass().getResourceAsStream("/images/male.png"));
+    private final Image womanImage = new Image(this.getClass().getResourceAsStream("/images/female.png"));
 
     /**
      * Initializes the MainWindow.

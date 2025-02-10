@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * A GUI for using Eva using FXML.
  */
 public class Main extends Application {
-    private Eva eva = new Eva();
+    private final Eva eva = new Eva();
 
     /**
      * Starts the application.
@@ -30,7 +30,8 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setEva(eva);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Error starting Eva!");
         }
     }
 }

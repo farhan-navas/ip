@@ -60,11 +60,11 @@ public class Ui {
         if (this.taskList.isEmpty()) {
             return "You have no tasks in your list!";
         }
-        String result = "Here are the tasks in your list: \n";
+        StringBuilder result = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < this.taskList.size(); i++) {
-            result += (i + 1) + ". " + this.taskList.get(i).toString() + "\n";
+            result.append(i + 1).append(". ").append(this.taskList.get(i).toString()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     /**
@@ -120,7 +120,7 @@ public class Ui {
      */
     private String findTask(String taskDesc) {
         String keyword = taskDesc.split(" ")[1];
-        String result = "";
+        StringBuilder result = new StringBuilder();
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : this.taskList) {
             if (task.getName().contains(keyword)) {
@@ -128,14 +128,14 @@ public class Ui {
             }
         }
         if (foundTasks.isEmpty()) {
-            result += "No tasks found with the keyword: " + keyword;
+            result.append("No tasks found with the keyword: ").append(keyword);
         } else {
-            result += "Here are the matching tasks in your list: \n";
+            result.append("Here are the matching tasks in your list: \n");
             for (int i = 0; i < foundTasks.size(); i++) {
-                result += (i + 1) + ". " + foundTasks.get(i).toString() + "\n";
+                result.append(i + 1).append(". ").append(foundTasks.get(i).toString()).append("\n");
             }
         }
 
-        return result;
+        return result.toString();
     }
 }
