@@ -26,7 +26,7 @@ public abstract class Task {
     /**
      * Constructor for Task object.
      *
-     * @param name name of the task.
+     * @param name   name of the task.
      * @param isDone status of the task.
      */
     public Task(String name, boolean isDone) {
@@ -116,18 +116,20 @@ public abstract class Task {
         String taskType = split[0].trim();
         boolean isDone = split[1].trim().equals("1");
         String taskName = split[2].trim();
-        if (taskType.equals("E")) {
+        switch (taskType) {
+        case "E" -> {
             LocalDate startTime = LocalDate.parse(split[3].split("-")[0].trim());
             LocalDate endTime = LocalDate.parse(split[3].split("-")[1].trim());
             return new Event(taskName, isDone, startTime, endTime);
-        } else if (taskType.equals("D")) {
+        }
+        case "D" -> {
             LocalDate endTime = LocalDate.parse(split[3].trim());
             return new Deadline(taskName, isDone, endTime);
-        } else if (taskType.equals("T")) {
+        }
+        case "T" -> {
             return new Todo(taskName, isDone);
         }
-
-        throw new TaskException("Invalid task type!");
+        default -> throw new TaskException("Invalid task type!");
+        }
     }
-
 }

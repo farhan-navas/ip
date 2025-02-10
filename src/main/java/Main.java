@@ -36,7 +36,8 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setEva(eva);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Error starting Eva!");
             assert false : "IOException occurred while loading FXML!" + e.getMessage();
         }
     }
