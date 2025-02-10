@@ -36,6 +36,9 @@ public class Ui {
      * @throws TaskException If there is an error processing the tasks.
      */
     public String[] handleInput(String currInput, ArrayList<Task> taskList) throws TaskException {
+        assert currInput != null : "Current input is null!";
+        assert taskList != null : "Task list is null!";
+
         this.taskList = taskList;
         if (currInput.equals("list")) {
             return new String[] {this.printTaskList(), "default"};
@@ -57,6 +60,8 @@ public class Ui {
      * If the task list is empty, prints a message to inform the user.
      */
     private String printTaskList() {
+        assert taskList != null : "Task list is null!";
+
         if (this.taskList.isEmpty()) {
             return "You have no tasks in your list!";
         }
@@ -74,7 +79,10 @@ public class Ui {
      * @param isDone true if the task is to be marked as done, false otherwise.
      */
     private String markTask(String taskDesc, boolean isDone) {
+        assert taskDesc != null : "Task description is null!";
+
         int posToChange = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
+        assert posToChange >= 0 && posToChange < taskList.size() : "Task position is invalid!";
         if (isDone) {
             this.taskList.get(posToChange).markAsDone();
             return "Nice! I've marked this task as done: \n" + this.taskList.get(posToChange).toString();
@@ -92,6 +100,8 @@ public class Ui {
      * @throws TaskException if the task description is invalid.
      */
     private String addTask(String taskDesc) throws TaskException {
+        assert taskDesc != null : "Task description is null!";
+
         Task task = Task.createTask(taskDesc);
         this.taskList.add(task);
         String result = "Got it: I've added this task:\n" + task.toString() + "\n";
@@ -105,6 +115,8 @@ public class Ui {
      * @param taskDesc the task description.
      */
     private String deleteTask(String taskDesc) {
+        assert taskDesc != null : "Task description is null!";
+
         int posToDelete = Integer.parseInt(taskDesc.split(" ")[1]) - 1;
         Task task = this.taskList.get(posToDelete);
         this.taskList.remove(posToDelete);
@@ -119,8 +131,12 @@ public class Ui {
      * @param taskDesc the task description.
      */
     private String findTask(String taskDesc) {
+        assert taskDesc != null : "Task description is null!";
+
         String keyword = taskDesc.split(" ")[1];
         StringBuilder result = new StringBuilder();
+        assert keyword != null && !keyword.isEmpty() : "Keyword is null!";
+
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : this.taskList) {
             if (task.getName().contains(keyword)) {
