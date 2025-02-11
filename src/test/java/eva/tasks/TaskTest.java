@@ -1,8 +1,9 @@
 package eva.tasks;
 
-import eva.exceptions.TaskException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import eva.exceptions.TaskException;
 
 public class TaskTest {
     private Task task;
