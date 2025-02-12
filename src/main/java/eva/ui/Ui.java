@@ -3,6 +3,7 @@ package eva.ui;
 import java.util.ArrayList;
 
 import eva.exceptions.TaskException;
+import eva.storage.Sorter;
 import eva.tasks.Task;
 
 /**
@@ -43,15 +44,21 @@ public class Ui {
         if (currInput.equals("list")) {
             return new String[] {this.printTaskList(), "default"};
         } else if (currInput.startsWith("mark")) {
-            return new String[] {this.markTask(currInput, true), "ChangeMarkCommand"};
+            String res = this.markTask(currInput, true);
+            Sorter.sortTasks(this.taskList);
+            return new String[] {res, "ChangeMarkCommand"};
         } else if (currInput.startsWith("unmark")) {
-            return new String[] {this.markTask(currInput, false), "ChangeMarkCommand"};
+            String res = this.markTask(currInput, false);
+            Sorter.sortTasks(this.taskList);
+            return new String[] {res, "ChangeMarkCommand"};
         } else if (currInput.startsWith("delete")) {
             return new String[] {this.deleteTask(currInput), "DeleteCommand"};
         } else if (currInput.startsWith("find")) {
             return new String[] {this.findTask(currInput), "default"};
         } else {
-            return new String[] {this.addTask(currInput), "AddCommand"};
+            String res = this.addTask(currInput);
+            Sorter.sortTasks(this.taskList);
+            return new String[] {res, "AddCommand"};
         }
     }
 
