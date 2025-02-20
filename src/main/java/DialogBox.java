@@ -57,10 +57,22 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
+    /**
+     * Gets the dialog box for the user.
+     *
+     * @param text The text to be displayed in the dialog box.
+     * @param img The image to be displayed in the dialog box.
+     * @return The dialog box for the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Changes the style of the dialog box based on the command type.
+     *
+     * @param commandType The type of command to be executed.
+     */
     private void changeDialogStyle(String commandType) {
         switch(commandType) {
         case "AddCommand":
@@ -76,6 +88,14 @@ public class DialogBox extends HBox {
         }
     }
 
+    /**
+     * Gets the dialog box for Eva.
+     *
+     * @param text The text to be displayed in the dialog box.
+     * @param img The image to be displayed in the dialog box.
+     * @param commandType The type of command to be executed.
+     * @return The dialog box for Eva.
+     */
     public static DialogBox getEvaDialog(String text, Image img, String... commandType) {
         var db = new DialogBox(text, img);
         db.flip();
