@@ -1,4 +1,4 @@
-# Eva User Guide
+# <span style="color:orange">Eva User Guide</span> 
 
 ![Eva](Ui.png)
 
@@ -12,9 +12,24 @@ Eva can help manage three types of tasks:
 3. Events
     -   Event tasks are tasks that start at a specific time and end at a specific time.
 
-## App Features
+## <span style="color:orange">Quick Start</span> 
 
-### Adding todos: `todo`
+1. Ensure you have Java `17` or above installed in your Computer.<br>**Mac users**: Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+2. Download the latest `eva.jar` release from [here](https://github.com/farhan-navas/ip/releases).
+3. Copy the file to the folder you want to use as the home folder for Eva.
+4. Open a command terminal, navigate to the folder where `eva.jar` is located and run the command `java -jar eva.jar`. 
+5. A GUI similar to the one shown above should appear. You can now start using Eva.
+6. Type the command in the command box and press Enter to execute it. Some example commands you can try:
+    - `todo Read Harry Potter`: Adds a todo task with the description `Read Harry Potter`.
+    - `list`: Lists all tasks.
+    - `delete 1`: Deletes the 1st task shown in the current list.
+    - `bye`: Exits the app.
+7. Refer to the [Features](#app-features) section below for details of each command.
+
+## <a id="app-features"><span style="color:orange">Features</span></a>
+
+### <span style="color:orange">Adding todos: `todo`</span>
+\
 To add a todo task, type `todo` followed by the description of the task. Say we have a new task to read Harry Potter. We can add it by simply typing:
 
 ```
@@ -31,7 +46,8 @@ Now you have 1 task in the list.
 
 Format: `todo DESCRIPTION`
 
-### Adding deadlines: `deadline`
+### <span style="color:orange">Adding deadlines: `deadline`</span> 
+\
 To add a deadline task, type `deadline` followed by the description of the task and the deadline. Say we have a new task to submit a report by 11:59pm on 20th October 2021. We can add it by typing:
 
 ```
@@ -48,7 +64,8 @@ Now you have 2 tasks in the list.
 
 Format: `deadline DESCRIPTION /by YYYY-MM-DD HH:MM`
 
-### Adding events: `event`
+### <span style="color:orange">Adding events: `event`</span> 
+\
 To add an event task, type `event` followed by the description of the task and the event time. Say we have a new task to attend a meeting on 20th October 2021 from 2pm to 4pm. We can add it by typing:
 
 ```
@@ -65,7 +82,8 @@ Now you have 3 tasks in the list.
 
 Format: `event DESCRIPTION /from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM`
 
-### Listing all tasks: `list`
+### <span style="color:orange">Listing all tasks: `list`</span> 
+\
 To see all the tasks you have added, type `list`. Eva will respond by showing you all the tasks you have added.
 
 ```
@@ -77,7 +95,8 @@ Here are the tasks in your list:
 
 Format: `list`
 
-### Marking a task as done: `mark`
+### <span style="color:orange">Marking a task as done: `mark`</span> 
+\
 To mark a task as done, type `mark` followed by the task number. Say we have completed the task to read Harry Potter. We can mark it as done by typing:
 
 ```
@@ -93,7 +112,8 @@ Nice! I've marked this task as done:
 
 Format: `mark TASK_NUMBER`
 
-### Marking a task as undone: `unmark`
+### <span style="color:orange">Marking a task as undone: `unmark`</span> 
+\
 To mark a task as undone, type `unmark` followed by the task number. Say we have not completed the task to read Harry Potter. We can mark it as undone by typing:
 
 ```
@@ -109,7 +129,8 @@ Nice! I've marked this task as undone:
 
 Format: `unmark TASK_NUMBER`
 
-### Deleting a task: `delete`
+### <span style="color:orange">Deleting a task: `delete`</span> 
+\
 To delete a task, type `delete` followed by the task number. Say we want to delete the task to read Harry Potter. We can delete it by typing:
 
 ```
@@ -126,7 +147,8 @@ Now you have 2 tasks in the list.
 
 Format: `delete TASK_NUMBER`
 
-### Finding tasks by keyword: `find`
+### <span style="color:orange">Finding tasks: `find`</span> 
+\
 To find tasks that contain a specific keyword, type `find` followed by the keyword. Say we want to find tasks that contain the keyword `report`. We can find it by typing:
 
 ```
@@ -142,7 +164,8 @@ Here are the matching tasks in your list:
 
 Format: `find KEYWORD`
 
-### Exiting the app: `bye`
+### <span style="color:orange">Exiting the app: `bye`</span> 
+\
 To exit the app, type `bye`. Eva will respond by saying goodbye and automatically closing the app.
 
 ```
