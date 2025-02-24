@@ -120,7 +120,7 @@ public abstract class Task {
 
         return switch (taskType) {
         case "E" -> {
-            LocalDate[] times = Arrays.stream(split[3].split("-"))
+            LocalDate[] times = Arrays.stream(split[3].split("\\|"))
                     .map(String::trim)
                     .map(LocalDate::parse)
                     .toArray(LocalDate[]::new);
