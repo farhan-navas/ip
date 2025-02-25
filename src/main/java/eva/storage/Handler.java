@@ -60,7 +60,7 @@ public class Handler {
                 for (Task currTask : tasks) {
                     if (currTask instanceof eva.tasks.Event) {
                         taskFileWriter.write("E | " + (currTask.isDone() ? "1 " : "0 ") + "| " + currTask.getName()
-                                + " | " + ((eva.tasks.Event) currTask).getStartTime() + "| "
+                                + " | " + ((eva.tasks.Event) currTask).getStartTime() + " | "
                                 + ((eva.tasks.Event) currTask).getEndTime() + "\n");
                     } else if (currTask instanceof eva.tasks.Deadline) {
                         taskFileWriter.write("D | " + (currTask.isDone() ? "1 " : "0 ") + "| "

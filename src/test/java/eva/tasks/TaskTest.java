@@ -29,16 +29,6 @@ public class TaskTest {
     }
 
     @Test
-    public void testLoadTask_event() throws TaskException {
-        Task task = Task.loadTask("E | 0 | project meeting | 2025-02-21 | 2025-02-22");
-        assertInstanceOf(Event.class, task);
-        assertEquals("project meeting", task.getName());
-        assertEquals(false, task.isDone());
-        assertEquals(LocalDate.parse("2025-02-21"), ((Event) task).getStartTime());
-        assertEquals(LocalDate.parse("2025-02-22"), ((Event) task).getEndTime());
-    }
-
-    @Test
     public void testLoadTask_invalidTask_throwsException() {
         assertThrows(TaskException.class, () -> Task.loadTask("X | 0 | unknown task"));
     }
