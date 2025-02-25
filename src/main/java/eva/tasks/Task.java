@@ -120,11 +120,9 @@ public abstract class Task {
 
         return switch (taskType) {
         case "E" -> {
-            LocalDate[] times = Arrays.stream(split[3].split("\\|"))
-                    .map(String::trim)
-                    .map(LocalDate::parse)
-                    .toArray(LocalDate[]::new);
-            yield new Event(taskName, isDone, times[0], times[1]);
+            LocalDate startTime = LocalDate.parse(split[3].trim());
+            LocalDate endTime = LocalDate.parse(split[4].trim());
+            yield new Event(taskName, isDone, startTime, endTime);
         }
         case "D" -> {
             LocalDate endTime = LocalDate.parse(split[3].trim());
