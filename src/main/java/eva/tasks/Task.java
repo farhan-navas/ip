@@ -1,7 +1,6 @@
 package eva.tasks;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import eva.exceptions.TaskException;
 
